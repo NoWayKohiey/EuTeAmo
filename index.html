@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para o Amor da Minha Vida</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #fff0f5;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            color: #d23669;
+        }
+        
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .photo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ff69b4;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .photo:hover {
+            transform: scale(1.05);
+        }
+        
+        .message {
+            font-size: 24px;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff69b4;
+            animation: fall linear forwards;
+            pointer-events: none;
+            z-index: 100;
+            top: -50px;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Estilos do Contador */
+        .love-counter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 182, 193, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+            width: 90%;
+            max-width: 800px;
+        }
+        
+        .counter-item {
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        .counter-item span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d23669;
+            display: block;
+        }
+        
+        .counter-item small {
+            color: #ff69b4;
+            font-size: 12px;
+        }
+
+        /* Player de Música */
+        .music-player {
+            background: rgba(255, 182, 193, 0.3);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 10px;
+            width: 300px;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .player-controls button {
+            background: #ff69b4;
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        
+        .player-controls button:hover {
+            transform: scale(1.1);
+        }
+        
+        .song-info {
+            margin-top: 5px;
+            font-style: italic;
+            color: #d23669;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="nos.jpeg" alt="Nós" class="photo" id="couplePhoto">
+        
+        <div class="message">
+            Dois anos de um relacionamento que chegou pra mudar a minha vida,<br>
+            feliz nosso dia minha metade ❤️
+        </div>
+        
+        <!-- Contador de Relacionamento -->
+        <div class="love-counter">
+            <div class="counter-item">
+                <span id="years">00</span>
+                <small>Anos</small>
+            </div>
+            <div class="counter-item">
+                <span id="months">00</span>
+                <small>Meses</small>
+            </div>
+            <div class="counter-item">
+                <span id="days">00</span>
+                <small>Dias</small>
+            </div>
+            <div class="counter-item">
+                <span id="hours">00</span>
+                <small>Horas</small>
+            </div>
+            <div class="counter-item">
+                <span id="minutes">00</span>
+                <small>Minutos</small>
+            </div>
+            <div class="counter-item">
+                <span id="seconds">00</span>
+                <small>Segundos</small>
+            </div>
+        </div>
+
+        <!-- Player de Música -->
+        <div class="music-player">
+            <div class="song-info"></div>
+            <div class="player-controls">
+                <button onclick="document.getElementById('player').play()">▶</button>
+                <button onclick="document.getElementById('player').pause()">⏸</button>
+                <button onclick="document.getElementById('player').volume -= 0.1">🔉</button>
+                <button onclick="document.getElementById('player').volume += 0.1">🔊</button>
+            </div>
+            <audio id="player" src="moca_do_espelho.mp3"></audio>
+        </div>
+    </div>
+
+    <script>
+        // ========== SISTEMA DE CORAÇÕES ========== //
+        function createHeart(isClick = false) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            heart.style.fontSize = (isClick ? 30 : 15) + 'px';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        document.getElementById('couplePhoto').addEventListener('click', () => {
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => createHeart(true), i * 100);
+            }
+        });
+
+        // ========== CONTADOR PRECISO ========== //
+        const startDate = new Date("2023-03-18"); // SUA DATA DE INÍCIO
+
+        function updateCounter() {
+            const now = new Date();
+            
+            let years = now.getFullYear() - startDate.getFullYear();
+            let months = now.getMonth() - startDate.getMonth();
+            let days = now.getDate() - startDate.getDate();
+
+            if (days < 0) {
+                const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+                days += lastMonth.getDate();
+                months--;
+            }
+
+            if (months < 0) {
+                months += 12;
+                years--;
+            }
+
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            
+            document.getElementById('hours').textContent = now.getHours().toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = now.getSeconds().toString().padStart(2, '0');
+        }
+
+        updateCounter();
+        setInterval(updateCounter, 1000);
+
+        // ========== CONTROLE DE VOLUME INICIAL ========== //
+        document.getElementById('player').volume = 0.7;
+    </script>
+</body>
+</html>
